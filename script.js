@@ -283,10 +283,14 @@
      ═══════════════════════════════════════════ */
 
   function initStory(storyImages) {
-    $("#storyTitle").textContent = CONFIG.story.title;
-    $("#storyContent").textContent = CONFIG.story.content;
-
+    const titleEl = $("#storyTitle");
+    const contentEl = $("#storyContent");
     const container = $("#storyPhotos");
+    if (!container) return;
+
+    if (titleEl) titleEl.textContent = CONFIG.story.title;
+    if (contentEl) contentEl.textContent = CONFIG.story.content;
+
     const placeholder = container.querySelector(".loading-placeholder");
     if (placeholder) placeholder.remove();
 
@@ -623,9 +627,6 @@
     initAccounts();
     initFooter();
     initScrollAnimations();
-
-    $("#storyTitle").textContent = CONFIG.story.title;
-    $("#storyContent").textContent = CONFIG.story.content;
 
     // Auto-detect images in parallel
     const [storyImages, galleryImages] = await Promise.all([
