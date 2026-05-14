@@ -18,30 +18,30 @@ const CONFIG = {
 
   // ── 메인 (히어로) ──
   groom: {
-    name: "신랑",
-    father: "아버지",
-    mother: "어머니",
+    name: "두민수",
+    father: "두갑진",
+    mother: "강민숙",
     fatherDeceased: false,
     motherDeceased: false
   },
 
   bride: {
-    name: "신부",
-    father: "아버지",
-    mother: "어머니",
+    name: "이혜선",
+    father: "이기선",
+    mother: "김은례",
     fatherDeceased: false,
     motherDeceased: false
   },
 
   wedding: {
-    date: "2026-05-09",
-    time: "13:00",
-    venue: "예식장 이름",
-    hall: "그랜드홀 5층",
-    address: "서울특별시 강남구 테헤란로 123",
-    tel: "02-1234-5678",
+    date: "2026-08-08",
+    time: "17:50",
+    venue: "여의도웨딩컨벤션",
+    hall: "그랜드블룸홀 3층",
+    address: "서울특별시 영등포구 여의대로 14 KT",
+    tel: "02-761-3800",
     mapLinks: {
-      kakao: "https://map.kakao.com/",
+      kakao: "https=://map.kakao.com/",
       naver: "https://map.naver.com/"
     }
   },
@@ -49,13 +49,13 @@ const CONFIG = {
   // ── 인사말 ──
   greeting: {
     title: "소중한 분들을 초대합니다",
-    content: "서로 다른 길을 걸어온 두 사람이\n이제 같은 길을 함께 걸어가려 합니다.\n\n저희의 새로운 시작을\n축복해 주시면 감사하겠습니다.\n\n저희의 새로운 시작을\n축복해 주시면 감사하겠습니다.\n\n저희의 새로운 시작을\n축복해 주시면 감사하겠습니다.\n\n저희의 새로운 시작을\n축복해 주시면 감사하겠습니다."
+    content: "함께 맞이하는 여섯번째 여름날, 결혼합니다.\n두 사람이 하나가 되어 하나님 안에서 가정을 이루어가려 합니다.\n부부로서 내딛는 이 소중한 시작에 함께해 주세요."
   },
 
   // ── 우리의 이야기 ──
   story: {
-    title: "우리의 이야기",
-    content: "서로 다른 길을 걷던 두 사람이\n하나의 길을 함께 걷게 되었습니다.\n\n여러분을 소중한 자리에 초대합니다."
+    title: ".",
+    content: "."
   },
 
   // ── 오시는 길 ──
@@ -77,7 +77,7 @@ const CONFIG = {
 
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
-    title: "신랑 ♥ 신부 결혼합니다",
-    description: "2026년 5월 9일, 소중한 분들을 초대합니다."
+    title: "두민수 ♥ 이혜선 결혼합니다",
+    description: "2026년 8월 8.일, 소중한 분들을 초대합니다."
   }
 };
