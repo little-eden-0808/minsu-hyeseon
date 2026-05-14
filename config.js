@@ -14,7 +14,7 @@
 
 const CONFIG = {
   // ── 초대장 열기 ──
-  useCurtain: false,  // 초대장 열기 화면 사용 여부 (true: 사용, false: 바로 본문 표시)
+  useCurtain: false, // 초대장 열기 화면 사용 여부 (true: 사용, false: 바로 본문 표시)
 
   // ── 메인 (히어로) ──
   groom: {
@@ -22,7 +22,7 @@ const CONFIG = {
     father: "두갑진",
     mother: "강민숙",
     fatherDeceased: false,
-    motherDeceased: false
+    motherDeceased: false,
   },
 
   bride: {
@@ -30,7 +30,7 @@ const CONFIG = {
     father: "이기선",
     mother: "김은례",
     fatherDeceased: false,
-    motherDeceased: false
+    motherDeceased: false,
   },
 
   wedding: {
@@ -41,21 +41,30 @@ const CONFIG = {
     address: "서울특별시 영등포구 여의대로 14 KT",
     tel: "02-761-3800",
     mapLinks: {
-      kakao: "https=://map.kakao.com/",
-      naver: "https://map.naver.com/"
-    }
+      kakao: "https://place.map.kakao.com/8011957",
+      naver: "https://naver.me/FHlgBdXp",
+    },
+  },
+
+  // ── 네이버 지도 (Web Dynamic Map) ──
+  naverMap: {
+    clientId: "9lb1de89ap",
+    lat: 37.521812,
+    lng: 126.919666,
+    zoom: 17,
   },
 
   // ── 인사말 ──
   greeting: {
     title: "소중한 분들을 초대합니다",
-    content: "함께 맞이하는 여섯번째 여름날, 결혼합니다.\n두 사람이 하나가 되어 하나님 안에서 가정을 이루어가려 합니다.\n부부로서 내딛는 이 소중한 시작에 함께해 주세요."
+    content:
+      "함께 맞이하는 여섯번째 여름날, 결혼합니다.\n두 사람이 하나가 되어 하나님 안에서 가정을 이루어가려 합니다.\n부부로서 내딛는 이 소중한 시작에 함께해 주세요.",
   },
 
   // ── 우리의 이야기 ──
   story: {
     title: ".",
-    content: "."
+    content: ".",
   },
 
   // ── 오시는 길 ──
@@ -64,20 +73,50 @@ const CONFIG = {
   // ── 마음 전하실 곳 ──
   accounts: {
     groom: [
-      { role: "신랑", name: "홍길동", bank: "국민은행", number: "000-000-000000" },
-      { role: "아버지", name: "홍판서", bank: "신한은행", number: "000-000-000000" },
-      { role: "어머니", name: "김부인", bank: "우리은행", number: "000-000-000000" }
+      {
+        role: "신랑",
+        name: "홍길동",
+        bank: "국민은행",
+        number: "000-000-000000",
+      },
+      {
+        role: "아버지",
+        name: "홍판서",
+        bank: "신한은행",
+        number: "000-000-000000",
+      },
+      {
+        role: "어머니",
+        name: "김부인",
+        bank: "우리은행",
+        number: "000-000-000000",
+      },
     ],
     bride: [
-      { role: "신부", name: "김영희", bank: "하나은행", number: "000-000-000000" },
-      { role: "아버지", name: "김사장", bank: "기업은행", number: "000-000-000000" },
-      { role: "어머니", name: "이부인", bank: "농협은행", number: "000-000-000000" }
-    ]
+      {
+        role: "신부",
+        name: "김영희",
+        bank: "하나은행",
+        number: "000-000-000000",
+      },
+      {
+        role: "아버지",
+        name: "김사장",
+        bank: "기업은행",
+        number: "000-000-000000",
+      },
+      {
+        role: "어머니",
+        name: "이부인",
+        bank: "농협은행",
+        number: "000-000-000000",
+      },
+    ],
   },
 
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
     title: "두민수 ♥ 이혜선 결혼합니다",
-    description: "2026년 8월 8.일, 소중한 분들을 초대합니다."
-  }
+    description: "2026년 8월 8.일, 소중한 분들을 초대합니다.",
+  },
 };

@@ -463,13 +463,40 @@
     $('#locationHall').textContent = w.hall;
     $('#locationAddress').textContent = w.address;
     $('#locationTel').textContent = w.tel ? `Tel. ${w.tel}` : '';
-    $('#locationMapImg').src = 'images/location/1.jpg';
     $('#kakaoMapBtn').href = w.mapLinks.kakao || '#';
     $('#naverMapBtn').href = w.mapLinks.naver || '#';
 
     $('#copyAddressBtn').addEventListener('click', () => {
       copyToClipboard(w.address, '주소가 복사되었습니다');
     });
+
+    initNaverMap();
+  }
+
+  function initNaverMap() {
+    const m = CONFIG.naverMap;
+    const mapEl = document.getElementById('naverMap');
+    if (!m || !m.clientId || !mapEl) return;
+
+    const script = document.createElement('script');
+    script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(m.clientId)}`;
+    script.async = true;
+    script.onload = () => {
+      if (typeof naver === 'undefined' || !naver.maps) return;
+      const position = new naver.maps.LatLng(m.lat, m.lng);
+      const map = new naver.maps.Map(mapEl, {
+        center: position,
+        zoom: m.zoom || 17,
+        zoomControl: true,
+        zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT },
+      });
+      new naver.maps.Marker({
+        position,
+        map,
+        title: CONFIG.wedding.venue,
+      });
+    };
+    document.head.appendChild(script);
   }
 
   /* ═══════════════════════════════════════════
