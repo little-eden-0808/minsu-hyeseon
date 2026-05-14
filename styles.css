@@ -497,12 +497,14 @@ a {
 .gallery__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 0;
+  margin-left: calc(-1 * var(--spacing-md));
+  margin-right: calc(-1 * var(--spacing-md));
 }
 
 .gallery__item {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   cursor: pointer;
 }
@@ -907,7 +909,9 @@ a {
   }
 
   .gallery__grid {
-    gap: 3px;
+    gap: 0;
+    margin-left: calc(-1 * var(--spacing-lg));
+    margin-right: calc(-1 * var(--spacing-lg));
   }
 
   .section__title {
