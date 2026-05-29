@@ -53,7 +53,7 @@ const CONFIG = {
   naverMap: {
     clientId: "9lb1de89ap",
     lat: 37.521812,
-    lng: 126.918066,
+    lng: 126.919066,
     zoom: 17,
   },
 
