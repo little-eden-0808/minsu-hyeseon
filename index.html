@@ -13,7 +13,7 @@
     <meta property="og:title" content="두민수와 이혜선 결혼합니다💍" />
     <meta
       property="og:description"
-      content="2026년 8월 8일 오후 5시50분\n소중한 분들을 초대합니다."
+      content="2026년 8월 8일 오후 5시 50분 소중한 분들을 초대합니다."
     />
     <meta
       property="og:image"
@@ -27,16 +27,21 @@
     />
     <meta
       name="description"
-      content="2026년 8월 8일 오후 5시50분\n소중한 분들을 초대합니다."
+      content="2026년 8월 8일 오후 5시 50분 소중한 분들을 초대합니다."
     />
 
     <title>Wedding Invitation</title>
 
-    <!-- Fonts -->
+    <!-- Fonts: Pretendard (본문) + Gowun Dodum (히어로 오버레이) -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
       rel="stylesheet"
     />
 
@@ -66,20 +71,6 @@
       <button class="photo-modal__close" id="modalClose" aria-label="닫기">
         &times;
       </button>
-      <button
-        class="photo-modal__nav photo-modal__nav--prev"
-        id="modalPrev"
-        aria-label="이전 사진"
-      >
-        &#8249;
-      </button>
-      <button
-        class="photo-modal__nav photo-modal__nav--next"
-        id="modalNext"
-        aria-label="다음 사진"
-      >
-        &#8250;
-      </button>
       <div class="photo-modal__container" id="modalContainer">
         <img
           class="photo-modal__img"
@@ -89,7 +80,23 @@
           draggable="false"
         />
       </div>
-      <div class="photo-modal__counter" id="modalCounter"></div>
+      <div class="photo-modal__controls">
+        <button
+          class="photo-modal__nav photo-modal__nav--prev"
+          id="modalPrev"
+          aria-label="이전 사진"
+        >
+          &#8249;
+        </button>
+        <div class="photo-modal__counter" id="modalCounter"></div>
+        <button
+          class="photo-modal__nav photo-modal__nav--next"
+          id="modalNext"
+          aria-label="다음 사진"
+        >
+          &#8250;
+        </button>
+      </div>
     </div>
 
     <!-- ─── Main Content ─── -->
@@ -104,23 +111,23 @@
             alt="웨딩 사진"
             loading="eager"
           />
-        </div>
-        <div class="hero__content">
-          <h1
-            class="hero__names animate-item"
-            data-animate="fade-up"
-            id="heroNames"
-          ></h1>
-          <p
-            class="hero__date animate-item"
-            data-animate="fade-up"
-            id="heroDate"
-          ></p>
-          <p
-            class="hero__venue animate-item"
-            data-animate="fade-up"
-            id="heroVenue"
-          ></p>
+          <div class="hero__content">
+            <h1
+              class="hero__names animate-item"
+              data-animate="fade-up"
+              id="heroNames"
+            ></h1>
+            <p
+              class="hero__date animate-item"
+              data-animate="fade-up"
+              id="heroDate"
+            ></p>
+            <p
+              class="hero__venue animate-item"
+              data-animate="fade-up"
+              id="heroVenue"
+            ></p>
+          </div>
         </div>
 
         <!-- Greeting Section -->
@@ -131,10 +138,10 @@
               data-animate="fade-up"
               id="greetingTitle"
             ></h2>
-            <div
+            <!-- <div
               class="section__divider animate-item"
               data-animate="fade-in"
-            ></div>
+            ></div> -->
             <p
               class="greeting__text animate-item"
               data-animate="fade-up"
@@ -172,11 +179,6 @@
         <!-- Gallery Section -->
         <section class="section gallery" id="gallery">
           <div class="section__inner">
-            <h2 class="section__title animate-item" data-animate="fade-up"></h2>
-            <div
-              class="section__divider animate-item"
-              data-animate="fade-in"
-            ></div>
             <div class="gallery__grid" id="galleryGrid"></div>
           </div>
         </section>
@@ -194,7 +196,7 @@
           </div>
           <img
             class="calendar__image"
-            src="images/calendar/1.jpg"
+            src="images/calendar/1__.png"
             alt="예식 일시"
           />
           <div class="section__inner">
@@ -224,6 +226,16 @@
               class="section__divider animate-item"
               data-animate="fade-in"
             ></div>
+            <p
+              class="location__address animate-item"
+              data-animate="fade-up"
+              id="locationAddress"
+            ></p>
+            <p
+              class="location__venue animate-item"
+              data-animate="fade-up"
+              id="locationVenue"
+            ></p>
             <!-- <div class="location__info">
               <p class="location__venue" id="locationVenue"></p>
               <p class="location__hall" id="locationHall"></p>
@@ -319,6 +331,13 @@
           </div>
         </div>
       </div>
+      <!-- Share -->
+      <div class="share">
+        <button class="share__btn" id="shareBtn" type="button">
+          청첩장 공유하기
+        </button>
+      </div>
+
       <!-- Footer -->
       <footer class="footer">
         <p class="footer__text" id="footerText"></p>

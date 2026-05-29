@@ -16,6 +16,9 @@ const CONFIG = {
   // ── 초대장 열기 ──
   useCurtain: false, // 초대장 열기 화면 사용 여부 (true: 사용, false: 바로 본문 표시)
 
+  // ── 카운트다운 (결혼식까지 D-day 타이머) ──
+  useCountdown: false, // true: 표시, false: 숨김
+
   // ── 메인 (히어로) ──
   groom: {
     name: "두민수",
@@ -38,7 +41,7 @@ const CONFIG = {
     time: "17:50",
     venue: "여의도웨딩컨벤션",
     hall: "그랜드블룸홀 3층",
-    address: "서울특별시 영등포구 여의대로 14 KT",
+    address: "서울특별시 영등포구 여의대로 14",
     tel: "02-761-3800",
     mapLinks: {
       kakao: "https://place.map.kakao.com/8011957",
@@ -59,12 +62,12 @@ const CONFIG = {
     {
       icon: "🚇",
       title: "지하철",
-      desc: "5호선 여의도역 3번 출구에서 도보 5분",
+      desc: "5,9호선 여의도역 1번 출구에서 도보 8분",
     },
     {
       icon: "🚌",
       title: "버스",
-      desc: "여의도역 정류장에서 하차 (간선/지선 버스)",
+      desc: "한국경제인협회 정류장 하차 (정류장번호 : 19161)",
     },
     {
       icon: "🚗",
@@ -75,7 +78,7 @@ const CONFIG = {
 
   // ── 인사말 ──
   greeting: {
-    title: "🤍",
+    title: "🕊️",
     content:
       "함께 맞이하는 6번째 여름날 결혼합니다.\n\n두 사람이 하나가 되어\n하나님 안에서 가정을 이루어가려 합니다.\n\n부부로서 내딛는 소중한 시작에\n귀한 걸음 하시어 축복해주신다면\n더 없는 기쁨으로 간직하겠습니다.",
   },
@@ -136,6 +139,6 @@ const CONFIG = {
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
     title: "두민수와 이혜선 결혼합니다💍",
-    description: "2026년 8월 8일 오후5시50분\n소중한 분들을 초대합니다.",
+    description: "2026년 8월 8일 오후 5시 50분 소중한 분들을 초대합니다.",
   },
 };

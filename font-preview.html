@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>폰트 비교 (임시)</title>
+
+    <!-- 한글 웹폰트 한꺼번에 로드 -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;500;700&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Black+Han+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #fafafa;
+        --card-bg: #fff;
+        --text: #333;
+        --muted: #888;
+        --border: #e5e5e5;
+        --accent: #4a90e2;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Pretendard Variable",
+          system-ui,
+          sans-serif;
+        line-height: 1.5;
+        padding: 2rem 1rem;
+      }
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .intro {
+        color: var(--muted);
+        font-size: 0.875rem;
+        margin-bottom: 2rem;
+      }
+      h2 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 2.5rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--text);
+        letter-spacing: 1px;
+      }
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .label {
+        font-family:
+          "Pretendard Variable",
+          system-ui,
+          sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 1rem;
+      }
+      .sample-names {
+        font-size: 1.5rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+        text-align: center;
+        margin-bottom: 0.75rem;
+      }
+      .sample-date {
+        font-size: 0.875rem;
+        font-weight: 300;
+        color: var(--muted);
+        text-align: center;
+        margin-bottom: 1.25rem;
+        letter-spacing: 1px;
+      }
+      .sample-body {
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 2;
+        color: var(--text);
+        text-align: center;
+        white-space: pre-line;
+        margin-bottom: 1.25rem;
+      }
+      .sample-parents {
+        font-size: 1rem;
+        line-height: 2.2;
+        color: var(--text);
+        text-align: center;
+        letter-spacing: 1px;
+      }
+      .sample-parents .child {
+        font-weight: 500;
+      }
+      .weights {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed var(--border);
+        flex-wrap: wrap;
+      }
+      .weights span {
+        font-size: 0.875rem;
+      }
+      .w300 {
+        font-weight: 300;
+      }
+      .w400 {
+        font-weight: 400;
+      }
+      .w500 {
+        font-weight: 500;
+      }
+      .w700 {
+        font-weight: 700;
+      }
+
+      /* 폰트별 클래스 */
+      .f-pretendard {
+        font-family: "Pretendard Variable", sans-serif;
+      }
+      .f-noto-sans {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+      .f-malgun {
+        font-family: "Malgun Gothic", sans-serif;
+      }
+      .f-gowun-dodum {
+        font-family: "Gowun Dodum", sans-serif;
+      }
+      .f-nanum-gothic {
+        font-family: "Nanum Gothic", sans-serif;
+      }
+      .f-apple-sd {
+        font-family: "Apple SD Gothic Neo", sans-serif;
+      }
+      .f-gowun-batang {
+        font-family: "Gowun Batang", serif;
+      }
+      .f-nanum-myeongjo {
+        font-family: "Nanum Myeongjo", serif;
+      }
+      .f-noto-serif {
+        font-family: "Noto Serif KR", serif;
+      }
+      .f-black-han {
+        font-family: "Black Han Sans", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📝 한글 폰트 비교</h1>
+      <p class="intro">
+        같은 청첩장 텍스트로 모든 폰트를 한 번에 비교해 보세요.<br />
+        ※ Apple SD Gothic Neo는 iOS/macOS에서만 보이고, Malgun Gothic은
+        Windows에서만 보입니다.
+      </p>
+
+      <h2>SANS-SERIF (고딕)</h2>
+
+      <!-- Pretendard -->
+      <div class="card f-pretendard">
+        <div class="label">Pretendard Variable (현재 사용 중)</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w300">300 Light</span>
+          <span class="w400">400 Regular</span>
+          <span class="w500">500 Medium</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <!-- Noto Sans KR -->
+      <div class="card f-noto-sans">
+        <div class="label">Noto Sans KR</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w300">300 Light</span>
+          <span class="w400">400 Regular</span>
+          <span class="w500">500 Medium</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <!-- Malgun Gothic -->
+      <div class="card f-malgun">
+        <div class="label">Malgun Gothic (Windows 기본)</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w400">400 Regular</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <!-- Apple SD Gothic Neo -->
+      <div class="card f-apple-sd">
+        <div class="label">Apple SD Gothic Neo (iOS/macOS 기본)</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w300">300 Light</span>
+          <span class="w400">400 Regular</span>
+          <span class="w500">500 Medium</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <!-- Gowun Dodum -->
+      <div class="card f-gowun-dodum">
+        <div class="label">Gowun Dodum (둥글둥글 고딕)</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w400">400 Regular (유일한 굵기)</span>
+        </div>
+      </div>
+
+      <!-- Nanum Gothic -->
+      <div class="card f-nanum-gothic">
+        <div class="label">Nanum Gothic</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w400">400 Regular</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <h2>SERIF (명조)</h2>
+
+      <!-- Gowun Batang -->
+      <div class="card f-gowun-batang">
+        <div class="label">Gowun Batang (부드러운 명조)</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w400">400 Regular</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <!-- Nanum Myeongjo -->
+      <div class="card f-nanum-myeongjo">
+        <div class="label">Nanum Myeongjo (클래식 명조)</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w400">400 Regular</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <!-- Noto Serif KR -->
+      <div class="card f-noto-serif">
+        <div class="label">Noto Serif KR (모던 명조)</div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다. 두 사람이 하나가 되어 부부로서
+          내딛는 소중한 시작에 귀한 걸음 하시어 축복해주신다면 더 없는 기쁨으로
+          간직하겠습니다.
+        </div>
+        <div class="sample-parents">
+          두갑진 · 강민숙 의 장남
+          <span class="child">두민수</span>
+        </div>
+        <div class="weights">
+          <span class="w400">400 Regular</span>
+          <span class="w500">500 Medium</span>
+          <span class="w700">700 Bold</span>
+        </div>
+      </div>
+
+      <h2>BONUS - 디스플레이 폰트</h2>
+
+      <!-- Black Han Sans -->
+      <div class="card f-black-han">
+        <div class="label">
+          Black Han Sans (디스플레이용 — 보통 본문엔 안 씀)
+        </div>
+        <div class="sample-names">두민수 &amp; 이혜선</div>
+        <div class="sample-date">2026. 08. 08 · SAT 17:50</div>
+        <div class="sample-body">
+          함께 맞이하는 6번째 여름날 결혼합니다.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

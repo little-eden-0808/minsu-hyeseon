@@ -135,7 +135,7 @@
       return;
     }
 
-    namesEl.textContent = `${CONFIG.groom.name}  &  ${CONFIG.bride.name}`;
+    namesEl.innerHTML = `${CONFIG.groom.name} <span class="amp">&amp;</span> ${CONFIG.bride.name}`;
     document.body.classList.add("no-scroll");
 
     btn.addEventListener("click", () => {
@@ -153,8 +153,8 @@
 
   function initHero() {
     $("#heroPhoto").src = "images/hero/1.jpg";
-    $("#heroNames").textContent =
-      `${CONFIG.groom.name}  ⁎  ${CONFIG.bride.name}`;
+    $("#heroNames").innerHTML =
+      `${CONFIG.groom.name}<span class="amp">&amp;</span>${CONFIG.bride.name}`;
     $("#heroDate").textContent = formatDate(
       CONFIG.wedding.date,
       CONFIG.wedding.time,
@@ -167,6 +167,13 @@
      ═══════════════════════════════════════════ */
 
   function initCountdown() {
+    const countdownEl = $("#countdown");
+
+    if (CONFIG.useCountdown === false) {
+      if (countdownEl) countdownEl.style.display = "none";
+      return;
+    }
+
     const target = getWeddingDateTime();
 
     function update() {
@@ -221,13 +228,13 @@
     const parentsHTML = `
       <div class="parent-row">
         ${parentLine(g.father, g.mother, g.fatherDeceased, g.motherDeceased)}
-        <span class="parent-dot">·</span>
-        의 아들 <span class="child-name">${g.name}</span>
+        
+        의 장남 <span class="child-name">${g.name}</span>
       </div>
       <div class="parent-row">
         ${parentLine(b.father, b.mother, b.fatherDeceased, b.motherDeceased)}
-        <span class="parent-dot">·</span>
-        의 딸 <span class="child-name">${b.name}</span>
+        
+        의 장녀 <span class="child-name">${b.name}</span>
       </div>
     `;
 
@@ -300,7 +307,7 @@
       const div = document.createElement("div");
       div.className = "story__photo-item animate-item";
       div.setAttribute("data-animate", "fade-up");
-      div.innerHTML = `<img src="${src}" alt="스토리 사진 ${i + 1}" loading="lazy">`;
+      div.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
       div.addEventListener("click", () => openPhotoModal(storyImages, i));
       container.appendChild(div);
     });
@@ -310,23 +317,23 @@
      Gallery Section
      ═══════════════════════════════════════════ */
 
-  function initGallery(galleryImages) {
+  function initGallery(thumbs, originals) {
     const grid = $("#galleryGrid");
     const placeholder = grid.querySelector(".loading-placeholder");
     if (placeholder) placeholder.remove();
 
-    if (galleryImages.length === 0) {
+    if (thumbs.length === 0) {
       const gallerySection = $("#gallery");
       if (gallerySection) gallerySection.style.display = "none";
       return;
     }
 
-    galleryImages.forEach((src, i) => {
+    thumbs.forEach((thumbSrc, i) => {
       const div = document.createElement("div");
       div.className = "gallery__item animate-item";
       div.setAttribute("data-animate", "fade-up");
-      div.innerHTML = `<img src="${src}" alt="갤러리 사진 ${i + 1}" loading="lazy">`;
-      div.addEventListener("click", () => openPhotoModal(galleryImages, i));
+      div.innerHTML = `<img src="${thumbSrc}" alt="갤러리 사진 ${i + 1}" loading="lazy">`;
+      div.addEventListener("click", () => openPhotoModal(originals, i));
       grid.appendChild(div);
     });
   }
@@ -440,7 +447,8 @@
       const el = $(sel);
       if (el) el.textContent = value;
     };
-    setText("#locationVenue", w.venue);
+    setText("#locationAddress", w.address);
+    setText("#locationVenue", `${w.venue} ${w.hall}`);
     setText("#locationHall", w.hall);
     setText("#locationTel", w.tel ? `Tel. ${w.tel}` : "");
     setText("#addressBoxAddr", w.address);
@@ -454,6 +462,13 @@
     const copyBtn = $("#copyAddressBtn");
     if (copyBtn) {
       copyBtn.addEventListener("click", () => {
+        copyToClipboard(w.address, "주소가 복사되었습니다");
+      });
+    }
+
+    const addressEl = $("#locationAddress");
+    if (addressEl) {
+      addressEl.addEventListener("click", () => {
         copyToClipboard(w.address, "주소가 복사되었습니다");
       });
     }
@@ -547,8 +562,33 @@
     const year = dt.getFullYear();
     const month = String(dt.getMonth() + 1).padStart(2, "0");
     const day = String(dt.getDate()).padStart(2, "0");
-    $("#footerText").textContent = "Psalm 23:1";
+    $("#footerText").textContent = "ⓒ made by hyeseon\nPsalm 23:1";
     // $('#footerText').textContent = `${CONFIG.groom.name} & ${CONFIG.bride.name} — ${year}.${month}.${day}`;
+  }
+
+  /* ═══════════════════════════════════════════
+     Share Button
+     ═══════════════════════════════════════════ */
+
+  function initShare() {
+    const btn = $("#shareBtn");
+    if (!btn) return;
+
+    btn.addEventListener("click", async () => {
+      const url = window.location.href;
+      const title = CONFIG.meta.title;
+      const text = CONFIG.meta.description;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({ title, text, url });
+        } catch {
+          // 사용자가 공유 취소했거나 실패 — 무시
+        }
+      } else {
+        copyToClipboard(url, "링크가 복사되었습니다");
+      }
+    });
   }
 
   /* ═══════════════════════════════════════════
@@ -626,16 +666,22 @@
     initLocation();
     initAccounts();
     initFooter();
+    initShare();
     initScrollAnimations();
 
-    // Auto-detect images in parallel
-    const [storyImages, galleryImages] = await Promise.all([
+    // Auto-detect images in parallel (갤러리는 가벼운 썸네일로 감지)
+    const [storyImages, galleryThumbs] = await Promise.all([
       loadImagesFromFolder("story"),
-      loadImagesFromFolder("gallery"),
+      loadImagesFromFolder("gallery/thumb"),
     ]);
 
+    // 모달은 원본 사용 (클릭 시에만 로드됨)
+    const galleryOriginals = galleryThumbs.map((p) =>
+      p.replace("/gallery/thumb/", "/gallery/"),
+    );
+
     initStory(storyImages);
-    initGallery(galleryImages);
+    initGallery(galleryThumbs, galleryOriginals);
   }
 
   if (document.readyState === "loading") {

@@ -11,9 +11,15 @@
   --color-text-light: #888888;
   --color-divider: #e0e0e0;
   --color-white: #ffffff;
+  --color-gallery-frame: #fceee6; /* 갤러리 섹션 배경 + 사진 프레임 통일 */
+  --color-greeting-bg: #ffffff; /* 인사말 섹션 배경 - 연한 크림 */
 
   --font-sans:
-    "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Segoe UI",
+    sans-serif;
+  --font-display:
+    "Gowun Dodum", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -21,6 +27,15 @@
   --spacing-lg: 2.5rem;
   --spacing-xl: 4rem;
   --spacing-2xl: 5rem;
+
+  /* ─── Font Sizes ─── */
+  --fs-xs: 0.6875rem; /* 11px - 카운트다운 단위, 미세 라벨, 작은 아이콘 */
+  --fs-sm: 0.8125rem; /* 13px - 버튼, 캡션, 보조 정보 */
+  --fs-md: 0.875rem; /* 14px - 부가 본문 (날짜, 홀, 교통) */
+  --fs-base: 1rem; /* 16px - 본문 (인사말, 주소) */
+  --fs-lg: 1.125rem; /* 18px - 섹션 제목 */
+  --fs-xl: 1.5rem; /* 24px - 히어로 이름, 카운트다운 구분자 */
+  --fs-2xl: 2rem; /* 32px - 카운트다운 숫자, 모달 닫기 */
 
   --transition: 0.3s ease;
 
@@ -112,7 +127,7 @@ a {
 }
 
 .curtain__names {
-  font-size: 1.25rem;
+  font-size: var(--fs-xl);
   font-weight: 300;
   color: var(--color-text);
   letter-spacing: 4px;
@@ -124,7 +139,7 @@ a {
   padding: 0.75rem 2.5rem;
   border: 1px solid var(--color-divider);
   color: var(--color-text);
-  font-size: 0.875rem;
+  font-size: var(--fs-md);
   font-weight: 400;
   letter-spacing: 2px;
   background: transparent;
@@ -148,7 +163,7 @@ a {
   color: var(--color-white);
   padding: 0.75rem 1.5rem;
   border-radius: 100px;
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   font-weight: 400;
   z-index: 10000;
   opacity: 0;
@@ -192,7 +207,7 @@ a {
   top: calc(1rem + var(--safe-top));
   right: calc(1rem + var(--safe-right));
   color: var(--color-white);
-  font-size: 2rem;
+  font-size: var(--fs-2xl);
   width: 44px;
   height: 44px;
   display: flex;
@@ -207,41 +222,13 @@ a {
   opacity: 1;
 }
 
-.photo-modal__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-white);
-  font-size: 2.5rem;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  opacity: 0.7;
-  transition: opacity var(--transition);
-}
-
-.photo-modal__nav:hover {
-  opacity: 1;
-}
-
-.photo-modal__nav--prev {
-  left: calc(0.5rem + var(--safe-left));
-}
-
-.photo-modal__nav--next {
-  right: calc(0.5rem + var(--safe-right));
-}
-
 .photo-modal__container {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3.5rem 2.5rem;
+  padding: 0;
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
@@ -253,14 +240,42 @@ a {
   object-fit: contain;
 }
 
-.photo-modal__counter {
+.photo-modal__controls {
   position: absolute;
-  bottom: calc(1.5rem + var(--safe-bottom));
+  bottom: calc(1.25rem + var(--safe-bottom));
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 2;
+}
+
+.photo-modal__nav {
+  color: var(--color-white);
+  font-size: var(--fs-xl);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity var(--transition);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.photo-modal__nav:hover {
+  opacity: 1;
+}
+
+.photo-modal__counter {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   letter-spacing: 2px;
+  min-width: 3rem;
+  text-align: center;
 }
 
 /* ═══════════════════════════════════════════
@@ -274,7 +289,7 @@ a {
 
 @media (min-width: 600px) {
   .main-content {
-    max-width: 420px;
+    max-width: 400px;
     margin: 0 auto;
     min-height: 100vh;
   }
@@ -282,7 +297,7 @@ a {
 
 /* ─── Section Base ─── */
 .section {
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-xl) 0;
 }
 
 .section__inner {
@@ -293,11 +308,27 @@ a {
 }
 
 .section__title {
-  font-size: 1.125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: var(--fs-lg);
   font-weight: 400;
-  letter-spacing: 2px;
-  margin-bottom: var(--spacing-sm);
+  letter-spacing: 3px;
+  margin-bottom: var(--spacing-md);
   color: var(--color-text);
+}
+
+.section__title::before,
+.section__title::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--color-text-light);
+}
+
+.greeting .section__title::before,
+.greeting .section__title::after {
+  display: none;
 }
 
 .section__divider {
@@ -315,30 +346,68 @@ a {
 .hero__photo-wrap {
   width: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .hero__photo {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
   object-position: center 30%;
 }
 
+.hero__photo-wrap::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
 .hero__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   text-align: center;
-  padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md);
+  padding: 0 var(--spacing-md) var(--spacing-lg);
+  z-index: 1;
+  font-family: var(--font-display);
+}
+
+.hero__content .hero__names,
+.hero__content .hero__date,
+.hero__content .hero__venue {
+  color: #fff;
+}
+
+.hero__content .hero__names .amp {
+  color: #fff;
 }
 
 .hero__names {
-  font-size: 1.5rem;
+  font-size: var(--fs-xl);
   font-weight: 300;
   letter-spacing: 6px;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-xs);
   color: var(--color-text);
 }
 
+.hero__names .amp,
+.curtain__names .amp {
+  font-weight: 400;
+  margin: 0 0.2em 0 0.15em;
+}
+
 .hero__date {
-  font-size: 0.875rem;
+  font-size: var(--fs-md);
   font-weight: 300;
   color: var(--color-text-light);
   letter-spacing: 1px;
@@ -346,7 +415,7 @@ a {
 }
 
 .hero__venue {
-  font-size: 0.875rem;
+  font-size: var(--fs-md);
   font-weight: 300;
   color: var(--color-text-light);
   letter-spacing: 1px;
@@ -361,7 +430,7 @@ a {
 }
 
 .countdown__label {
-  font-size: 0.75rem;
+  font-size: var(--fs-sm);
   font-weight: 400;
   letter-spacing: 2px;
   color: var(--color-text-light);
@@ -383,7 +452,7 @@ a {
 }
 
 .countdown__number {
-  font-size: 1.75rem;
+  font-size: var(--fs-2xl);
   font-weight: 300;
   line-height: 1;
   letter-spacing: 1px;
@@ -391,7 +460,7 @@ a {
 }
 
 .countdown__unit {
-  font-size: 0.625rem;
+  font-size: var(--fs-xs);
   font-weight: 400;
   letter-spacing: 1px;
   color: var(--color-text-light);
@@ -399,7 +468,7 @@ a {
 }
 
 .countdown__sep {
-  font-size: 1.25rem;
+  font-size: var(--fs-xl);
   font-weight: 300;
   color: var(--color-divider);
   margin-top: -0.75rem;
@@ -408,12 +477,16 @@ a {
 /* ═══════════════════════════════════════════
    Greeting Section
    ═══════════════════════════════════════════ */
+.greeting .section__title {
+  margin-bottom: var(--spacing-lg);
+}
+
 .greeting {
-  background-color: var(--color-bg);
+  background-color: var(--color-greeting-bg);
 }
 
 .greeting__text {
-  font-size: 0.9375rem;
+  font-size: var(--fs-base);
   font-weight: 300;
   line-height: 2;
   color: var(--color-text-light);
@@ -422,7 +495,7 @@ a {
 }
 
 .greeting__parents {
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   font-weight: 300;
   line-height: 2.2;
   color: var(--color-text);
@@ -438,7 +511,6 @@ a {
 
 .greeting__parents .parent-dot {
   color: var(--color-text-light);
-  font-size: 0.375rem;
 }
 
 .greeting__parents .child-name {
@@ -459,7 +531,7 @@ a {
 }
 
 .story__text {
-  font-size: 0.9375rem;
+  font-size: var(--fs-base);
   font-weight: 300;
   line-height: 2;
   color: var(--color-text-light);
@@ -493,15 +565,20 @@ a {
    Gallery Section
    ═══════════════════════════════════════════ */
 .gallery {
-  background-color: var(--color-bg);
+  background-color: var(--color-gallery-frame);
+}
+
+.gallery .section__inner {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .gallery__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  margin-left: calc(-1 * var(--spacing-md));
-  margin-right: calc(-1 * var(--spacing-md));
+  margin-left: var(--spacing-xs);
+  margin-right: var(--spacing-xs);
 }
 
 .gallery__item {
@@ -509,6 +586,8 @@ a {
   aspect-ratio: 2 / 3;
   overflow: hidden;
   cursor: pointer;
+  border: 2px solid var(--color-gallery-frame);
+  border-radius: 0;
 }
 
 .gallery__item img {
@@ -526,28 +605,55 @@ a {
    Location Section
    ═══════════════════════════════════════════ */
 .location {
-  background-color: var(--color-bg-alt);
+  background-color: var(--color-bg);
 }
 
 .location__info {
   margin-bottom: var(--spacing-md);
 }
 
-.location__venue {
-  font-size: 1rem;
-  font-weight: 500;
+.location__address {
+  font-size: var(--fs-md);
+  font-weight: 400;
+  color: var(--color-text-light);
+  letter-spacing: 0.5px;
   margin-bottom: 0.25rem;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color var(--transition);
+}
+
+.location__address:hover,
+.location__address:active {
+  background-color: var(--color-bg);
+}
+
+.location__address::after {
+  content: " ⧉";
+  font-size: var(--fs-xs);
+  color: #aaa;
+  margin-left: 0.3rem;
+}
+
+.location__venue {
+  font-size: var(--fs-md);
+  font-weight: 400;
+  color: var(--color-text-light);
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-md);
 }
 
 .location__hall {
-  font-size: 0.875rem;
+  font-size: var(--fs-md);
   font-weight: 300;
   color: var(--color-text-light);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
 }
 
 .location__tel {
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   font-weight: 300;
   color: var(--color-text-light);
   margin-top: 0.25rem;
@@ -579,7 +685,7 @@ a {
 }
 
 .address-box__addr {
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   font-weight: 300;
   color: var(--color-text-light);
   line-height: 1.5;
@@ -588,7 +694,7 @@ a {
 }
 
 .address-box__venue {
-  font-size: 0.9375rem;
+  font-size: var(--fs-base);
   font-weight: 700;
   color: var(--color-text);
   margin: 0.25rem 0 0;
@@ -597,7 +703,7 @@ a {
 
 .address-box__copy {
   padding: 0.5rem 0.875rem;
-  font-size: 0.75rem;
+  font-size: var(--fs-sm);
   font-weight: 400;
   color: var(--color-text-light);
   border: 1px solid var(--color-divider);
@@ -641,7 +747,7 @@ a {
 }
 
 .transport__title {
-  font-size: 0.875rem;
+  font-size: var(--fs-md);
   font-weight: 600;
   color: var(--color-text);
   margin: 0 0 0.25rem;
@@ -649,7 +755,7 @@ a {
 }
 
 .transport__desc {
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   font-weight: 300;
   color: var(--color-text-light);
   line-height: 1.7;
@@ -663,6 +769,7 @@ a {
    ═══════════════════════════════════════════ */
 .calendar-section {
   background-color: var(--color-bg);
+  padding: 0;
 }
 
 .calendar__image {
@@ -677,6 +784,7 @@ a {
   gap: var(--spacing-sm);
   justify-content: center;
   flex-wrap: wrap;
+  margin: var(--spacing-md) 0;
 }
 
 /* ═══════════════════════════════════════════
@@ -687,7 +795,7 @@ a {
 }
 
 .account__desc {
-  font-size: 0.875rem;
+  font-size: var(--fs-md);
   font-weight: 300;
   color: var(--color-text-light);
   margin-bottom: var(--spacing-lg);
@@ -701,12 +809,12 @@ a {
 }
 
 .account-group__title {
-  font-size: 0.9375rem;
+  font-size: var(--fs-md);
   font-weight: 500;
   letter-spacing: 1px;
   padding-bottom: 0.5rem;
   margin-bottom: 0.25rem;
-  border-bottom: 1px solid var(--color-text);
+  border-bottom: 1px solid var(--color-text-light);
   color: var(--color-text);
 }
 
@@ -735,7 +843,7 @@ a {
 }
 
 .account-row__bank {
-  font-size: 0.875rem;
+  font-size: var(--fs-md);
   font-weight: 400;
   color: var(--color-text);
   margin: 0;
@@ -743,7 +851,7 @@ a {
 }
 
 .account-row__name {
-  font-size: 0.75rem;
+  font-size: var(--fs-sm);
   font-weight: 300;
   color: var(--color-text-light);
   letter-spacing: 1px;
@@ -752,7 +860,7 @@ a {
 
 .account-row__copy {
   padding: 0.5rem 0.875rem;
-  font-size: 0.75rem;
+  font-size: var(--fs-sm);
   font-weight: 400;
   color: var(--color-text-light);
   border: 1px solid var(--color-divider);
@@ -778,7 +886,7 @@ a {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   font-weight: 400;
   letter-spacing: 1px;
   transition: var(--transition);
@@ -799,7 +907,7 @@ a {
 
 .btn--text {
   color: var(--color-text-light);
-  font-size: 0.8125rem;
+  font-size: var(--fs-sm);
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
@@ -813,6 +921,28 @@ a {
 }
 
 /* ═══════════════════════════════════════════
+   Share
+   ═══════════════════════════════════════════ */
+.share {
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md) 0;
+  background: var(--color-bg);
+}
+
+.share__btn {
+  width: 150px;
+  background: #ffea06;
+  color: #000;
+  border: none;
+  padding: 12px 8px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* ═══════════════════════════════════════════
    Footer
    ═══════════════════════════════════════════ */
 .footer {
@@ -820,14 +950,16 @@ a {
   padding-bottom: calc(var(--spacing-lg) + var(--safe-bottom));
   text-align: center;
   background: var(--color-bg);
-  border-top: 1px solid var(--color-divider);
+  /* border-top: 1px solid var(--color-divider); */
 }
 
 .footer__text {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 300;
   color: var(--color-text-light);
   letter-spacing: 2px;
+  white-space: pre-line;
+  line-height: 1.8;
 }
 
 /* ═══════════════════════════════════════════
@@ -877,20 +1009,11 @@ a {
 @media (min-width: 768px) {
   .section__inner {
     max-width: 600px;
-    padding: 0 var(--spacing-lg);
-  }
-
-  .hero__names {
-    font-size: 1.75rem;
-    letter-spacing: 8px;
+    /* padding: 0 var(--spacing-lg); */
   }
 
   .hero__photo {
     aspect-ratio: 2 / 3;
-  }
-
-  .countdown__number {
-    font-size: 2rem;
   }
 
   .countdown__item {
@@ -909,12 +1032,8 @@ a {
 
   .gallery__grid {
     gap: 0;
-    margin-left: calc(-1 * var(--spacing-lg));
-    margin-right: calc(-1 * var(--spacing-lg));
-  }
-
-  .section__title {
-    font-size: 1.25rem;
+    margin-left: var(--spacing-xs);
+    margin-right: var(--spacing-xs);
   }
 }
 
