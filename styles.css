@@ -586,7 +586,7 @@ a {
   aspect-ratio: 2 / 3;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid var(--color-gallery-frame);
+  /* border: 2px solid var(--color-gallery-frame); */
   border-radius: 0;
 }
 
