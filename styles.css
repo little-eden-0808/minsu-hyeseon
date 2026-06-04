@@ -11,7 +11,7 @@
   --color-text-light: #888888;
   --color-divider: #e0e0e0;
   --color-white: #ffffff;
-  --color-gallery-frame: #fbf4e3; /* 갤러리 섹션 배경 + 사진 프레임 통일 */
+  --color-gallery-frame: #fcf7eb; /* 갤러리 섹션 배경 + 사진 프레임 통일 */
   --color-greeting-bg: #ffffff; /* 인사말 섹션 배경 - 연한 크림 */
   --color-family-bg: #f5ecd9; /* 가족 섹션 배경 - 버터 크림 */
 
@@ -484,7 +484,7 @@ a {
 
 .greeting {
   background-color: var(--color-greeting-bg);
-  padding-bottom: 5.5rem;
+  padding-bottom: 5rem;
 }
 
 .greeting__text {
@@ -592,7 +592,7 @@ a {
   right: 0;
   padding: 0 var(--spacing-md) var(--spacing-xl);
   font-size: var(--fs-sm);
-  font-weight: 400;
+  font-weight: 500;
   color: var(--color-text);
   text-align: center;
   letter-spacing: 2px;
@@ -974,7 +974,7 @@ a {
    ═══════════════════════════════════════════ */
 .share {
   text-align: center;
-  padding: var(--spacing-xl) var(--spacing-md) 0;
+  padding: var(--spacing-lg) var(--spacing-md) 0;
   background: var(--color-bg);
 }
 
@@ -995,7 +995,7 @@ a {
    Footer
    ═══════════════════════════════════════════ */
 .footer {
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-md);
   padding-bottom: calc(var(--spacing-lg) + var(--safe-bottom));
   text-align: center;
   background: var(--color-bg);

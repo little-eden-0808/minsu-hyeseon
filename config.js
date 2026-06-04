@@ -59,8 +59,8 @@ const CONFIG = {
   // ── 네이버 지도 (Web Dynamic Map) ──
   naverMap: {
     clientId: "9lb1de89ap",
-    lat: 37.521812,
-    lng: 126.919266,
+    lat: 37.521712,
+    lng: 126.919066,
     zoom: 17,
   },
 
@@ -105,7 +105,7 @@ const CONFIG = {
       {
         role: "신랑",
         name: "두민수",
-        bank: "국민은행",
+        bank: "하나은행",
         number: "000-000-000000",
       },
       {
