@@ -270,7 +270,7 @@
     const endDt = new Date(dt.getTime() + 2 * 60 * 60 * 1000);
     const endDate =
       endDt.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-    const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(CONFIG.groom.name + " ♥ " + CONFIG.bride.name + " 결혼식")}&dates=${startDate}/${endDate}&location=${encodeURIComponent(CONFIG.wedding.venue + " " + CONFIG.wedding.address)}&details=${encodeURIComponent("결혼식에 초대합니다.")}`;
+    const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(CONFIG.groom.name + " & " + CONFIG.bride.name + " 결혼식")}&dates=${startDate}/${endDate}&location=${encodeURIComponent(CONFIG.wedding.venue + " " + CONFIG.wedding.address)}&details=${encodeURIComponent(" ")}`;
     $("#googleCalBtn").href = gcalUrl;
 
     // ICS download (Apple Calendar)
@@ -282,9 +282,9 @@
         "BEGIN:VEVENT",
         `DTSTART:${startDate}`,
         `DTEND:${endDate}`,
-        `SUMMARY:${CONFIG.groom.name} ♥ ${CONFIG.bride.name} 결혼식`,
+        `SUMMARY:${CONFIG.groom.name} & ${CONFIG.bride.name} 결혼식`,
         `LOCATION:${CONFIG.wedding.venue} ${CONFIG.wedding.address}`,
-        "DESCRIPTION:결혼식에 초대합니다.",
+        "DESCRIPTION: ",
         "END:VEVENT",
         "END:VCALENDAR",
       ].join("\r\n");
