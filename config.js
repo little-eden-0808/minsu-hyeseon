@@ -59,8 +59,8 @@ const CONFIG = {
   // ── 네이버 지도 (Web Dynamic Map) ──
   naverMap: {
     clientId: "9lb1de89ap",
-    lat: 37.521712,
-    lng: 126.919066,
+    lat: 37.5218,
+    lng: 126.919166,
     zoom: 17,
   },
 
