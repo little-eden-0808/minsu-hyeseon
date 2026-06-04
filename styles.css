@@ -609,8 +609,8 @@ a {
    ═══════════════════════════════════════════ */
 .gallery {
   background-color: var(--color-gallery-frame);
-  padding-top: var(--spacing-2xl);
-  padding-bottom: var(--spacing-2xl);
+  /* padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl); */
 }
 
 .gallery .section__inner {
