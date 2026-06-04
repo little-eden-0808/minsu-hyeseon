@@ -152,7 +152,7 @@
      ═══════════════════════════════════════════ */
 
   function initHero() {
-    $("#heroPhoto").src = "images/hero/1.jpg";
+    $("#heroPhoto").src = "images/hero/2.jpg";
     $("#heroNames").innerHTML =
       `${CONFIG.groom.name}<span class="amp">&amp;</span>${CONFIG.bride.name}`;
     $("#heroDate").textContent = formatDate(
@@ -349,7 +349,7 @@
       const div = document.createElement("div");
       div.className = "gallery__item animate-item";
       div.setAttribute("data-animate", "fade-up");
-      div.innerHTML = `<img src="${thumbSrc}" alt="갤러리 사진 ${i + 1}" loading="lazy">`;
+      div.innerHTML = `<img src="${thumbSrc}" alt="" loading="lazy" decoding="async">`;
       div.addEventListener("click", () => openPhotoModal(originals, i));
       grid.appendChild(div);
     });
@@ -687,19 +687,19 @@
     initShare();
     initScrollAnimations();
 
-    // Auto-detect images in parallel (갤러리는 가벼운 썸네일로 감지)
-    const [storyImages, galleryThumbs] = await Promise.all([
-      loadImagesFromFolder("story"),
-      loadImagesFromFolder("gallery/thumb"),
-    ]);
-
-    // 모달은 원본 사용 (클릭 시에만 로드됨)
+    // Gallery: 카운트 기반 즉시 빌드 (자동 감지 없음 → 초기 로딩 빠름)
+    const galleryThumbs = Array.from(
+      { length: CONFIG.gallery.count },
+      (_, i) => `images/gallery/thumb/${i + 1}.jpg`,
+    );
     const galleryOriginals = galleryThumbs.map((p) =>
       p.replace("/gallery/thumb/", "/gallery/"),
     );
-
-    initStory(storyImages);
     initGallery(galleryThumbs, galleryOriginals);
+
+    // Story: 자동 감지 유지 (섹션 주석 처리 상태라 no-op)
+    const storyImages = await loadImagesFromFolder("story");
+    initStory(storyImages);
   }
 
   if (document.readyState === "loading") {

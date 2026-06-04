@@ -19,6 +19,13 @@ const CONFIG = {
   // ── 카운트다운 (결혼식까지 D-day 타이머) ──
   useCountdown: false, // true: 표시, false: 숨김
 
+  // ── 갤러리 ──
+  // images/gallery/ 에 1.jpg ~ N.jpg, images/gallery/thumb/ 에 동일 개수 썸네일
+  // 사진 추가/제거 시 이 숫자만 맞춰주면 됨
+  gallery: {
+    count: 18,
+  },
+
   // ── 메인 (히어로) ──
   groom: {
     name: "두민수",
@@ -52,8 +59,8 @@ const CONFIG = {
   // ── 네이버 지도 (Web Dynamic Map) ──
   naverMap: {
     clientId: "9lb1de89ap",
-    lat: 37.521512,
-    lng: 126.919366,
+    lat: 37.521812,
+    lng: 126.919266,
     zoom: 17,
   },
 
