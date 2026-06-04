@@ -13,6 +13,7 @@
   --color-white: #ffffff;
   --color-gallery-frame: #fceee6; /* 갤러리 섹션 배경 + 사진 프레임 통일 */
   --color-greeting-bg: #ffffff; /* 인사말 섹션 배경 - 연한 크림 */
+  --color-family-bg: #f5ecd9; /* 가족 섹션 배경 - 버터 크림 */
 
   --font-sans:
     "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
@@ -486,7 +487,7 @@ a {
 }
 
 .greeting__text {
-  font-size: var(--fs-base);
+  font-size: var(--fs-md);
   font-weight: 300;
   line-height: 2;
   color: var(--color-text-light);
@@ -495,7 +496,7 @@ a {
 }
 
 .greeting__parents {
-  font-size: var(--fs-base);
+  font-size: var(--fs-md);
   font-weight: 300;
   line-height: 2.2;
   color: var(--color-text);
@@ -559,6 +560,47 @@ a {
 
 .story__photo-item:hover img {
   opacity: 0.9;
+}
+
+/* ═══════════════════════════════════════════
+   Family Section (가족 이야기 이미지 2장 세로 스택)
+   ═══════════════════════════════════════════ */
+.family {
+  padding: var(--spacing-xl) 0 var(--spacing-lg) 0;
+  background-color: var(--color-family-bg);
+}
+
+.family__item {
+  position: relative;
+}
+
+.family__item + .family__item {
+  margin-top: 7rem;
+}
+
+.family__image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.family__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0 var(--spacing-md) var(--spacing-xl);
+  font-size: var(--fs-md);
+  font-weight: 400;
+  color: var(--color-text);
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.7;
+  z-index: 1;
+}
+
+.family__overlay-child {
+  font-weight: 700;
 }
 
 /* ═══════════════════════════════════════════
@@ -810,6 +852,10 @@ a {
   text-align: left;
 }
 
+.account-group:last-child {
+  margin-bottom: 0;
+}
+
 .account-group__title {
   font-size: var(--fs-md);
   font-weight: 500;
@@ -1015,7 +1061,7 @@ a {
   }
 
   .hero__photo {
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 3 / 5;
   }
 
   .countdown__item {

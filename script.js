@@ -242,6 +242,23 @@
   }
 
   /* ═══════════════════════════════════════════
+     Family Section
+     ═══════════════════════════════════════════ */
+
+  function initFamily() {
+    const g = CONFIG.groom;
+    const b = CONFIG.bride;
+    const groomLabel = $("#familyGroomLabel");
+    const brideLabel = $("#familyBrideLabel");
+    if (groomLabel) {
+      groomLabel.innerHTML = `${g.father} & ${g.mother}의<br><span class="family__overlay-child">아들 ${g.name}</span>`;
+    }
+    if (brideLabel) {
+      brideLabel.innerHTML = `${b.father} & ${b.mother}의<br><span class="family__overlay-child">딸 ${b.name}</span>`;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
      Calendar Section
      ═══════════════════════════════════════════ */
 
@@ -658,6 +675,7 @@
     initHero();
     initCountdown();
     initGreeting();
+    initFamily();
     initCalendar();
 
     showLoadingPlaceholders();
