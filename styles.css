@@ -13,7 +13,7 @@
   --color-white: #ffffff;
   --color-gallery-frame: #fcf7eb; /* 갤러리 섹션 배경 + 사진 프레임 통일 */
   --color-greeting-bg: #ffffff; /* 인사말 섹션 배경 - 연한 크림 */
-  --color-family-bg: #f5ecd9; /* 가족 섹션 배경 - 버터 크림 */
+  --color-family-bg:#f8f1ec ; /* 가족 섹션 배경 - 버터 크림 */
 
   --font-sans:
     "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
