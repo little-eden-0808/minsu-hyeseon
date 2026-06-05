@@ -61,7 +61,7 @@ const CONFIG = {
     clientId: "9lb1de89ap",
     lat: 37.52175,
     lng: 126.919161,
-    zoom: 10,
+    zoom: 17,
   },
 
   // ── 오시는 길 - 교통 안내 ──
