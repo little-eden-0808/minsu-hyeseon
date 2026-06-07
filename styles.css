@@ -489,7 +489,7 @@ a {
 
 .greeting__text {
   font-size: var(--fs-md);
-  font-weight: 500;
+  font-weight: 300;
   line-height: 2;
   color: var(--color-text);
   white-space: pre-line;
