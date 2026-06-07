@@ -489,9 +489,9 @@ a {
 
 .greeting__text {
   font-size: var(--fs-md);
-  font-weight: 400;
+  font-weight: 300;
   line-height: 2;
-  /* color: var(--color-text-light);*/
+  color: var(--color-text);
   white-space: pre-line;
   margin-bottom: var(--spacing-xl);
 }
