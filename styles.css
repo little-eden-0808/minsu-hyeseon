@@ -580,9 +580,11 @@ a {
 }
 
 .family__image {
-  width: 90%;
+  width: 93%;
   height: auto;
   display: block;
+  margin-left: auto;  
+  margin-right: auto; 
 }
 
 .family__overlay {
