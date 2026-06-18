@@ -143,6 +143,13 @@ const CONFIG = {
     ],
   },
 
+  // ── RSVP (참석 의사 전달) ──
+  // Google Apps Script Web App URL (시트에 자동 기록)
+  rsvp: {
+    scriptUrl:
+      "https://script.google.com/macros/s/AKfycbw3GdBhMBvRGun-3Ka0hZlghbq_9UcsggD9uJ8_yRlHxsmw8ipIbJ2DFMFgEbANa-w/exec",
+  },
+
   // ── 링크 공유 시 나타나는 문구 ──
   meta: {
     title: "두민수와 이혜선 결혼합니다💍",

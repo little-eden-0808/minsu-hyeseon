@@ -33,41 +33,6 @@
   }
 
   /* ═══════════════════════════════════════════
-     Image Auto-Detection
-     ═══════════════════════════════════════════ */
-
-  function loadImagesFromFolder(folder, maxAttempts = 50) {
-    return new Promise((resolve) => {
-      const images = [];
-      let current = 1;
-      let consecutiveFails = 0;
-
-      function tryNext() {
-        if (current > maxAttempts || consecutiveFails >= 3) {
-          resolve(images);
-          return;
-        }
-        const img = new Image();
-        const path = `images/${folder}/${current}.jpg`;
-        img.onload = function () {
-          images.push(path);
-          consecutiveFails = 0;
-          current++;
-          tryNext();
-        };
-        img.onerror = function () {
-          consecutiveFails++;
-          current++;
-          tryNext();
-        };
-        img.src = path;
-      }
-
-      tryNext();
-    });
-  }
-
-  /* ═══════════════════════════════════════════
      Toast
      ═══════════════════════════════════════════ */
 
@@ -299,34 +264,6 @@
       a.click();
       URL.revokeObjectURL(url);
       showToast("캘린더 파일이 다운로드됩니다");
-    });
-  }
-
-  /* ═══════════════════════════════════════════
-     Story Section
-     ═══════════════════════════════════════════ */
-
-  function initStory(storyImages) {
-    const titleEl = $("#storyTitle");
-    const contentEl = $("#storyContent");
-    const container = $("#storyPhotos");
-    if (!container) return;
-
-    if (titleEl) titleEl.textContent = CONFIG.story.title;
-    if (contentEl) contentEl.textContent = CONFIG.story.content;
-
-    const placeholder = container.querySelector(".loading-placeholder");
-    if (placeholder) placeholder.remove();
-
-    if (storyImages.length === 0) return;
-
-    storyImages.forEach((src, i) => {
-      const div = document.createElement("div");
-      div.className = "story__photo-item animate-item";
-      div.setAttribute("data-animate", "fade-up");
-      div.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
-      div.addEventListener("click", () => openPhotoModal(storyImages, i));
-      container.appendChild(div);
     });
   }
 
@@ -587,6 +524,109 @@
      Share Button
      ═══════════════════════════════════════════ */
 
+  /* ═══════════════════════════════════════════
+     RSVP (참석 의사 전달)
+     ═══════════════════════════════════════════ */
+
+  const RSVP_LS_KEY = "rsvp_dismissed_v1";
+
+  function openRsvpModal() {
+    const modal = $("#rsvpModal");
+    if (!modal) return;
+    modal.classList.add("is-open");
+    document.body.classList.add("no-scroll");
+  }
+
+  function closeRsvpModal() {
+    const modal = $("#rsvpModal");
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+    try {
+      localStorage.setItem(RSVP_LS_KEY, "1");
+    } catch {
+      // localStorage 비활성화된 경우 무시
+    }
+  }
+
+  function initRsvp() {
+    const modal = $("#rsvpModal");
+    if (!modal) return;
+
+    const backdrop = $("#rsvpBackdrop");
+    const closeBtn = $("#rsvpClose");
+    const openBtn = $("#rsvpOpenBtn");
+    const form = $("#rsvpForm");
+    const submitBtn = $("#rsvpSubmit");
+
+    // 닫기 핸들러
+    if (closeBtn) closeBtn.addEventListener("click", closeRsvpModal);
+    if (backdrop) backdrop.addEventListener("click", closeRsvpModal);
+
+    // 버튼으로 열기
+    if (openBtn) openBtn.addEventListener("click", openRsvpModal);
+
+    // 폼 제출
+    if (form && submitBtn) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+          name: formData.get("name")?.toString().trim() || "",
+          phone:
+            formData
+              .get("phone")
+              ?.toString()
+              .trim()
+              .replace(/[^0-9]/g, "") || "",
+          side: formData.get("side")?.toString() || "",
+          attendance: formData.get("attendance")?.toString() || "",
+        };
+
+        if (!data.name || !data.phone || !data.side || !data.attendance) {
+          showToast("모든 항목을 입력해 주세요");
+          return;
+        }
+
+        if (!CONFIG.rsvp || !CONFIG.rsvp.scriptUrl) {
+          showToast("응답 URL이 설정되지 않았습니다");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "전송 중...";
+
+        try {
+          await fetch(CONFIG.rsvp.scriptUrl, {
+            method: "POST",
+            body: JSON.stringify(data),
+          });
+          showToast("소중한 마음 감사합니다 🤍");
+          form.reset();
+          closeRsvpModal();
+        } catch {
+          showToast("전송 실패. 다시 시도해 주세요");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "전달하기";
+        }
+      });
+    }
+
+    // 첫 방문이면 자동 팝업 (살짝 지연으로 페이지 로드 후 자연스럽게)
+    let dismissed = false;
+    try {
+      dismissed = localStorage.getItem(RSVP_LS_KEY) === "1";
+    } catch {
+      // localStorage 비활성화 — 매번 띄움
+    }
+
+    if (!dismissed) {
+      setTimeout(openRsvpModal, 1500);
+    }
+  }
+
   function initShare() {
     const btn = $("#shareBtn");
     if (!btn) return;
@@ -613,13 +653,11 @@
      ═══════════════════════════════════════════ */
 
   function showLoadingPlaceholders() {
-    const storyPhotos = $("#storyPhotos");
     const galleryGrid = $("#galleryGrid");
 
     const placeholderHTML =
       '<div class="loading-placeholder"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>';
 
-    if (storyPhotos) storyPhotos.innerHTML = placeholderHTML;
     if (galleryGrid) galleryGrid.innerHTML = placeholderHTML;
   }
 
@@ -669,7 +707,7 @@
      Init
      ═══════════════════════════════════════════ */
 
-  async function init() {
+  function init() {
     setMetaTags();
     initCurtain();
     initHero();
@@ -685,6 +723,7 @@
     initAccounts();
     initFooter();
     initShare();
+    initRsvp();
     initScrollAnimations();
 
     // Gallery: 카운트 기반 즉시 빌드 (자동 감지 없음 → 초기 로딩 빠름)
@@ -696,10 +735,6 @@
       p.replace("/gallery/thumb/", "/gallery/"),
     );
     initGallery(galleryThumbs, galleryOriginals);
-
-    // Story: 자동 감지 유지 (섹션 주석 처리 상태라 no-op)
-    const storyImages = await loadImagesFromFolder("story");
-    initStory(storyImages);
   }
 
   if (document.readyState === "loading") {
