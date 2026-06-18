@@ -627,6 +627,90 @@
     }
   }
 
+  /* ═══════════════════════════════════════════
+     Background Music
+     ═══════════════════════════════════════════ */
+
+  const BGM_LS_KEY = "bgm_state_v1";
+
+  function initBgm() {
+    const btn = $("#bgmToggle");
+    const audio = $("#bgmAudio");
+    if (!btn || !audio) return;
+
+    if (!CONFIG.bgm || CONFIG.bgm.enabled === false || !CONFIG.bgm.file) {
+      btn.style.display = "none";
+      return;
+    }
+
+    audio.src = CONFIG.bgm.file;
+    audio.volume =
+      typeof CONFIG.bgm.volume === "number" ? CONFIG.bgm.volume : 0.5;
+
+    function setPlayingUI(isPlaying) {
+      btn.classList.toggle("is-playing", isPlaying);
+    }
+
+    function saveState(playing) {
+      try {
+        localStorage.setItem(BGM_LS_KEY, playing ? "playing" : "paused");
+      } catch {
+        /* 무시 */
+      }
+    }
+
+    function readState() {
+      try {
+        return localStorage.getItem(BGM_LS_KEY);
+      } catch {
+        return null;
+      }
+    }
+
+    async function tryPlay() {
+      try {
+        await audio.play();
+        setPlayingUI(true);
+        saveState(true);
+        return true;
+      } catch {
+        setPlayingUI(false);
+        return false;
+      }
+    }
+
+    function pause() {
+      audio.pause();
+      setPlayingUI(false);
+      saveState(false);
+    }
+
+    btn.addEventListener("click", () => {
+      if (audio.paused) {
+        tryPlay();
+      } else {
+        pause();
+      }
+    });
+
+    setPlayingUI(false);
+
+    // 이전에 재생 중이었으면 자동재생 시도 (브라우저가 막을 수도 있음)
+    const previousState = readState();
+    if (previousState !== "paused") {
+      tryPlay().then((ok) => {
+        if (!ok) {
+          // 자동재생 실패 — 첫 사용자 클릭 시 한 번만 시도
+          const onceListener = () => {
+            tryPlay();
+            window.removeEventListener("pointerdown", onceListener);
+          };
+          window.addEventListener("pointerdown", onceListener, { once: true });
+        }
+      });
+    }
+  }
+
   function initShare() {
     const btn = $("#shareBtn");
     if (!btn) return;
@@ -724,6 +808,7 @@
     initFooter();
     initShare();
     initRsvp();
+    initBgm();
     initScrollAnimations();
 
     // Gallery: 카운트 기반 즉시 빌드 (자동 감지 없음 → 초기 로딩 빠름)

@@ -19,6 +19,13 @@ const CONFIG = {
   // ── 카운트다운 (결혼식까지 D-day 타이머) ──
   useCountdown: false, // true: 표시, false: 숨김
 
+  // ── 배경 음악 ──
+  bgm: {
+    enabled: true, // false면 버튼 숨김
+    file: "audio/bgm.mp3", // 음악 파일 경로
+    volume: 0.5, // 음량 (0 ~ 1)
+  },
+
   // ── 갤러리 ──
   // images/gallery/ 에 1.jpg ~ N.jpg, images/gallery/thumb/ 에 동일 개수 썸네일
   // 사진 추가/제거 시 이 숫자만 맞춰주면 됨
