@@ -167,8 +167,8 @@ a {
   position: fixed;
   top: calc(1rem + var(--safe-top));
   right: calc(1rem + var(--safe-right));
-  width: 28px;
-  height: 28px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   z-index: 9800;
   cursor: pointer;
