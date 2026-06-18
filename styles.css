@@ -165,10 +165,10 @@ a {
    ═══════════════════════════════════════════ */
 .bgm-toggle {
   position: fixed;
-  top: calc(1rem + var(--safe-top));
+  bottom: calc(1rem + var(--safe-bottom));
   right: calc(1rem + var(--safe-right));
-  width: 35px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   z-index: 9800;
   cursor: pointer;
