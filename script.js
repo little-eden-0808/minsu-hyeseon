@@ -516,7 +516,7 @@
     const year = dt.getFullYear();
     const month = String(dt.getMonth() + 1).padStart(2, "0");
     const day = String(dt.getDate()).padStart(2, "0");
-    $("#footerText").textContent = "ⓒ bride hyeseon\nPsalm 23:1";
+    $("#footerText").textContent = "신부 혜선이가 뚝딱뚝딱 코드 작성해서 개발한 청첩장입니다👩🏻‍💻🤍\nPsalm 23:1";
     // $('#footerText').textContent = `${CONFIG.groom.name} & ${CONFIG.bride.name} — ${year}.${month}.${day}`;
   }
 
