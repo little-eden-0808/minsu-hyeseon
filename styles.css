@@ -1274,7 +1274,7 @@ a {
 .footer__text {
   font-size: var(--fs-xs);
   font-weight: 300;
-  color: var(--color-text-light);
+  color: var(--color-text);
   letter-spacing: 2px;
   white-space: pre-line;
   line-height: 1.8;
